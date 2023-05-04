@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Question, create, getDetail, update } from '@/api/question.api'
 import Layout from '@/components/Layout'
 import { ArrowBack, Save } from '@mui/icons-material'
@@ -62,7 +63,6 @@ export default function FormPage() {
       const result = getDetail(question_id as string)
 
       if (result) {
-        console.info('hasilnya', result)
         formik.setValues(result)
       }
     }
@@ -70,8 +70,7 @@ export default function FormPage() {
 
   useEffect(() => {
     handleGetDetail()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+  }, [question_id])
 
   return (
     <>
@@ -84,7 +83,7 @@ export default function FormPage() {
             <IconButton type='button' aria-label='back' color='primary' onClick={() => push('/')}>
               <ArrowBack />
             </IconButton>
-            <h1>{question_id ? 'Edit' : 'Add'} Question</h1>
+            <h1>{question_id ? '✏️ Edit' : '➕ Add'} Question</h1>
             <IconButton type='submit' aria-label='save' color='success'>
               <Save />
             </IconButton>
@@ -109,8 +108,8 @@ export default function FormPage() {
               label='Must Select'
               onChange={(e) => formik.setFieldValue('is_must_select', e.target.value)}
             >
-              <MenuItem value={0}>No</MenuItem>
               <MenuItem value={1}>Yes</MenuItem>
+              <MenuItem value={0}>No</MenuItem>
             </Select>
           </FormControl>
           <InputAnswerOption

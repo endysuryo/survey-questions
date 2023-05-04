@@ -12,59 +12,54 @@ interface IAnswerOption {
 
 export default function InputAnswerOption({ value, onChange, error }: IAnswerOption): JSX.Element {
   const [isBrowser, setIsBrowser] = useState(false)
-  const [answers, setAnswers] = useState<AnswerOption[]>(value)
 
   const handleDragEnd = (result: any) => {
     if (!result.destination) return
 
     const { source, destination } = result
-    const newItems = [...answers]
+    const newItems = [...value]
     const [removed] = newItems.splice(source.index, 1)
     newItems.splice(destination.index, 0, removed)
 
-    setAnswers(newItems)
+    onChange(newItems)
   }
 
   const handleAdd = useCallback(() => {
-    setAnswers([
-      ...answers,
-      {
-        id: crypto.randomUUID(),
-        answer: '',
-      },
-    ])
-  }, [answers])
+    const newAnswer = {
+      id: crypto.randomUUID(),
+      answer: '',
+    }
+    const modifyAnswers = [...value, newAnswer]
+
+    onChange(modifyAnswers)
+  }, [onChange, value])
 
   const handleChangeAnswer = useCallback(
-    (value: string, id: string) => {
-      const modifyAnswers = answers.map((item) => {
+    (answer: string, id: string) => {
+      const modifyAnswers = value.map((item) => {
         if (item.id === id) {
           return {
             ...item,
-            answer: value,
+            answer,
           }
         }
 
         return item
       })
 
-      setAnswers(modifyAnswers)
+      onChange(modifyAnswers)
     },
-    [answers],
+    [onChange, value],
   )
 
   const handleDeleteAnswer = useCallback(
     (id: string) => {
-      const filterAnswers = answers.filter((item) => item.id !== id)
+      const filterAnswers = value.filter((item) => item.id !== id)
 
-      setAnswers(filterAnswers)
+      onChange(filterAnswers)
     },
-    [answers],
+    [onChange, value],
   )
-
-  useEffect(() => {
-    onChange(answers)
-  }, [answers, onChange])
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -128,6 +123,7 @@ export default function InputAnswerOption({ value, onChange, error }: IAnswerOpt
             </Droppable>
           ) : null}
         </DragDropContext>
+        {!value.length && <p className='text-center'>Answers is empty</p>}
       </div>
     </>
   )

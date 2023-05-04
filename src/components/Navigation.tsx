@@ -5,9 +5,9 @@ export default function Navigation(): JSX.Element {
 
   return (
     <>
-      <nav className='p-5 sticky top-0 bg-orange-500 z-999'>
+      <nav className='p-5 sticky top-0 bg-blue-800 z-[999]'>
         <h1 className='text-white text-2xl cursor-pointer' onClick={() => push('/')}>
-          Survey Questions
+          📝 Survey Questions
         </h1>
       </nav>
     </>

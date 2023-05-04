@@ -59,7 +59,7 @@ export default function HomePage() {
       <Layout title='List - Survey Questions'>
         <div className='flex flex-col gap-6 justify-start lg:w-1/2 mx-auto'>
           <div className='flex flex-row justify-between items-start'>
-            <h1>Question List</h1>
+            <h1>📃 List Question</h1>
             <IconButton aria-label='add' color='success' onClick={() => push('/form')}>
               <Add />
             </IconButton>
@@ -107,7 +107,7 @@ export default function HomePage() {
               </Droppable>
             ) : null}
           </DragDropContext>
-          {items.length === 0 && <p className='text-center'>Questions is empty</p>}
+          {!items.length && <p className='text-center'>Questions is empty</p>}
         </div>
       </Layout>
     </>
