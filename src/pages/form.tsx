@@ -1,18 +1,11 @@
 import { Question, create, getDetail, update } from '@/api/question.api'
 import Layout from '@/components/Layout'
 import { ArrowBack, Save } from '@mui/icons-material'
-import {
-  Button,
-  FormControl,
-  IconButton,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material'
+import { FormControl, IconButton, InputLabel, MenuItem, Select, TextField } from '@mui/material'
 import { useFormik } from 'formik'
 import { useRouter } from 'next/router'
 import { useCallback, useEffect } from 'react'
+import InputAnswerOption from '@/components/form/InputAnswerOption'
 
 export default function FormPage() {
   const { push, query } = useRouter()
@@ -29,16 +22,39 @@ export default function FormPage() {
       handleSubmit(values)
     },
     enableReinitialize: true,
+    validateOnChange: false,
+    validateOnBlur: false,
+    validate: (values) => {
+      let errors: Partial<{
+        question: string
+        answer_option: string
+      }> = {}
+
+      if (!values.question) {
+        errors.question = 'Required'
+      }
+
+      if (!values.answer_option.length) {
+        errors.answer_option = 'Required'
+      }
+
+      return errors
+    },
   })
 
   const handleSubmit = (values: Question) => {
     if (question_id) {
       const result = update(question_id as string, values)
-      return push('/')
+
+      if (result) {
+        return push('/')
+      }
     }
 
     const result = create(values)
-    return push('/')
+    if (result) {
+      return push('/')
+    }
   }
 
   const handleGetDetail = useCallback(() => {
@@ -46,6 +62,7 @@ export default function FormPage() {
       const result = getDetail(question_id as string)
 
       if (result) {
+        console.info('hasilnya', result)
         formik.setValues(result)
       }
     }
@@ -96,6 +113,11 @@ export default function FormPage() {
               <MenuItem value={1}>Yes</MenuItem>
             </Select>
           </FormControl>
+          <InputAnswerOption
+            value={formik.values.answer_option}
+            onChange={(e) => formik.setFieldValue('answer_option', e)}
+            error={Boolean(formik.errors.answer_option)}
+          />
         </form>
       </Layout>
     </>

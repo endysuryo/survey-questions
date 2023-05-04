@@ -5,7 +5,7 @@ export interface Question {
   answer_option: AnswerOption[]
 }
 
-interface AnswerOption {
+export interface AnswerOption {
   id: string
   answer: string
 }
