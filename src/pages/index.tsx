@@ -80,7 +80,14 @@ export default function HomePage() {
                               className='px-4 py-6 border border-gray-200 rounded-xl m-2 bg-white flex flex-row gap-6 items-center'
                             >
                               <DragHandleIcon className='text-gray-300' />
-                              <div>{item.question}</div>
+                              <div>
+                                <p className='font-semibold text-md'>
+                                  {item.question}
+                                  {item.is_must_select === 1 && (
+                                    <sup className='text-red-500'> *</sup>
+                                  )}
+                                </p>
+                              </div>
                               <div className='ml-auto'>
                                 <IconButton
                                   aria-label='edit'
