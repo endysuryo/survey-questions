@@ -1,38 +1,41 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Survey Questions
 
-## Getting Started
+Survey Questions is an app for creating lists of questions and answers for survey purposes, developed using Next.js and TypeScript.
 
-First, run the development server:
+## 🏃‍♂️ How to run locally
+
+You can run the command below.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
+  npm start dev
+  or
+  yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🚀 Deployment
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+To deploy this project you can push your commit or PR to master branch, it will automatically trigger Vercel CI/CD pipeline.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+## 🌐 Website URL
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+https://survey-questions-six.vercel.app/
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+## 📦 Choice of Package
 
-## Learn More
+### - Tailwind CSS
 
-To learn more about Next.js, take a look at the following resources:
+- **Purpose :** to replace semantic CSS.
+- **Benefits :** fast development without writing any CSS.
+- **Underlying :** writing semantic CSS takes more time when we do development, so I am trying to get an alternate package to replace semantic CSS to speed up development and make it easy to maintain.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### - Material UI
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- **Purpose :** generate common components like form, alert, and icons.
+- **Benefits :** we can use consist components with same style and re-useable in another parent components.
+- **Underlying :** to build custom form components that are easy to use and maintain.
 
-## Deploy on Vercel
+### - Formik
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- **Purpose :** form hooks to handling form values, validation and submission.
+- **Benefits :** Formik allows you to define your form using a declarative syntax, which makes it easy to understand and maintain. You simply define your form fields, validation rules, and submission handler, and Formik takes care of the rest..
+- **Underlying :** to handle form submission in a centralized and easy-to-use way.
